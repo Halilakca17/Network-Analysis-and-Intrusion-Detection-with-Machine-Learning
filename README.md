@@ -4,8 +4,7 @@
 
 Bu proje, Kanada Siber Güvenlik Enstitüsü (CIC) tarafından yayımlanan CICIDS2017 veri kümesi kullanılarak ağ trafiğinde anomali (saldırı) tespiti için bir makine öğrenmesi modeli geliştirmeyi amaçlar. 
 
-📚 Kaynak
-
+📚 Kaynak<br>
 "Makine Öğrenmesi Yöntemleriyle Anormal Ağ Trafiğinin Tespiti" adlı akademik çalışma temel alınmıştır.
 
 Çalışma : https://dergipark.org.tr/tr/pub/dubited/issue/43004/498358
