@@ -6,8 +6,10 @@ Bu proje, Kanada Siber Güvenlik Enstitüsü (CIC) tarafından yayımlanan CICID
 📚 Kaynak
 "Makine Öğrenmesi Yöntemleriyle Anormal Ağ Trafiğinin Tespiti" adlı akademik çalışma temel alınmıştır.
 Çalışma : https://dergipark.org.tr/tr/pub/dubited/issue/43004/498358
+
 Çalışmada elde edilen sonuçlar : 
 ![Görsel  1](Images/ForReadMe4.PNG)
+
 Veriseti : https://www.kaggle.com/datasets/chethuhn/network-intrusion-dataset/data
 
 🔍 Amaç
