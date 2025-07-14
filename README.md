@@ -7,7 +7,7 @@ Bu proje, Kanada Siber Güvenlik Enstitüsü (CIC) tarafından yayımlanan CICID
 "Makine Öğrenmesi Yöntemleriyle Anormal Ağ Trafiğinin Tespiti" adlı akademik çalışma temel alınmıştır.
 Çalışma : https://dergipark.org.tr/tr/pub/dubited/issue/43004/498358
 Çalışmada elde edilen sonuçlar : 
-![Görsel  1](Images/ForReadMe4.png)
+![Görsel  1](Images/ForReadMe4.PNG)
 Veriseti : https://www.kaggle.com/datasets/chethuhn/network-intrusion-dataset/data
 
 🔍 Amaç
@@ -20,9 +20,9 @@ CICIDS2017: Gerçek dünya senaryolarında oluşturulmuş ağ trafiği.
 Özellikler CICFlowMeter ile ağ trafiğinden çıkarılmıştır.
 CICFlowMeter ile ağ trafiğinden özelliklerin nasıl çıkartıldığı ve bu özellikler hakkında detaylı bilgiler Npcap---Network Reposunda paylaşılacaktır.
 
-![Görsel  2 (Görseller ilgili makaleden alınmıştır.)](Images/ForReadMe1.png)
-![Görsel  3](Images/ForReadMe2.png)
-![Görsel  4](Images/ForReadMe3.png)
+![Görsel  2 (Görseller ilgili makaleden alınmıştır.)](Images/ForReadMe1.PNG)
+![Görsel  3](Images/ForReadMe2.PNG)
+![Görsel  4](Images/ForReadMe3.PNG)
 
 ⚙️ Kaynak kod
 1. 📁 Veri Yükleme ve Birleştirme
