@@ -1,96 +1,139 @@
-# Intrusion Detection with Machine Learning
+# 🛡️ Intrusion Detection with Machine Learning  
+### Anormal Ağ Trafiğinin Tespiti – CICIDS2017
 
-📊 Anormal Ağ Trafiğinin Tespiti - CICIDS2017
+Bu proje, **Kanada Siber Güvenlik Enstitüsü (CIC)** tarafından yayımlanan **CICIDS2017** veri kümesi kullanılarak anormal ağ trafiğinin tespiti için makine öğrenmesi modelleri geliştirmeyi amaçlamaktadır. 
+Projede toplam 2 milyon 830 bin 743 adet ağ trafiği örneği (row) kullanılmış. Her biri 79 özellik (column) içermekte.
 
-Bu proje, Kanada Siber Güvenlik Enstitüsü (CIC) tarafından yayımlanan CICIDS2017 veri kümesi kullanılarak ağ trafiğinde anomali (saldırı) tespiti için bir makine öğrenmesi modeli geliştirmeyi amaçlar. 
+---
 
-📚 Kaynak<br>
-"Makine Öğrenmesi Yöntemleriyle Anormal Ağ Trafiğinin Tespiti" adlı akademik çalışma temel alınmıştır.
+## 📑 İçindekiler
+- [📌 Giriş](#📌-giriş)
+- [📂 Veri Kümesi](#📂-veri-kümesi)
+- [⚙️ Yöntemoloji](#⚙️-yöntemoloji)
+- [🧹 Veri Ön İşleme](#🧹-veri-ön-i̇şleme)
+- [📊 Özellik Mühendisliği](#📊-özellik-mühendisliği)
+- [🧠 Model Geliştirme](#🧠-model-geliştirme)
+- [📈 Model Değerlendirme](#📈-model-değerlendirme)
+- [✅ Sonuç ve Tartışma](#✅-sonuç-ve-tartışma)
+- [⚠️ Zorluklar ve Sınırlılıklar](#⚠️-zorluklar-ve-sınırlılıklar)
+- [📚 Kaynaklar](#📚-kaynaklar)
 
-Çalışma : https://dergipark.org.tr/tr/pub/dubited/issue/43004/498358
+---
 
-Çalışmada elde edilen sonuçlar : 
-![Görsel  1](Images/ForReadMe4.PNG)
+## 📌 Giriş
 
-Veriseti : https://www.kaggle.com/datasets/chethuhn/network-intrusion-dataset/data
+Günümüzde artan siber tehditler karşısında, ağ trafiğini analiz eden **Anomali Tabanlı Saldırı Tespit Sistemleri (IDS)** büyük önem taşımaktadır. Bu proje, **CICIDS2017** verisinden çıkarılan özelliklerle normal ve saldırgan trafiği ayırt edebilen bir **Makine Öğrenmesi Tabanlı IDS** sistemi geliştirmeyi hedefler.
 
-🔍 Amaç
+> Kaynak alınan akademik çalışma:  
+> ["Makine Öğrenmesi Yöntemleriyle Anormal Ağ Trafiğinin Tespiti"](https://dergipark.org.tr/tr/pub/dubited/issue/43004/498358)
 
-Ağ trafiği kayıtlarından çıkarılan istatistiksel özellikler kullanılarak, normal ve anormal trafiğin (DoS, DDoS, Botnet vb.) sınıflandırılması hedeflenmektedir.
+---
 
-🗂️ Veri Kümesi
-CICIDS2017: Gerçek dünya senaryolarında oluşturulmuş ağ trafiği.
+## 📂 Veri Kümesi
 
-78+ özellik içeren .csv dosyaları kullanılmıştır.
+📁 **CICIDS2017**  
+- Gerçek kullanıcı davranışlarını içeren, güncel saldırı türlerini barındıran ağ trafiği verisi.  
+- Özellik çıkarımı **CICFlowMeter** aracıyla yapılmıştır.  
+- Toplam **78+ özellik** ve çoklu saldırı türü içerir.
+- CICFlowMeter ile ağ trafiğinden özelliklerin nasıl çıkartıldığı ve bu özellikler hakkında detaylı bilgiler Npcap---Network Reposunda paylaşılacaktır.
 
-Özellikler CICFlowMeter ile ağ trafiğinden çıkarılmıştır.
+📥 Veri seti: [Kaggle Üzerinden İndir](https://www.kaggle.com/datasets/chethuhn/network-intrusion-dataset/data)
 
-CICFlowMeter ile ağ trafiğinden özelliklerin nasıl çıkartıldığı ve bu özellikler hakkında detaylı bilgiler Npcap---Network Reposunda paylaşılacaktır.
+### 🔬 Özellik Görselleri
 
-![Görsel  2 (Görseller ilgili makaleden alınmıştır.)](Images/ForReadMe1.PNG)
-![Görsel  3](Images/ForReadMe2.PNG)
-![Görsel  4](Images/ForReadMe3.PNG)
+![Özellik Açıklama](Images/ForReadMe1.PNG)  
+![Flow Detayları](Images/ForReadMe2.PNG)  
+![Örnek Trafik](Images/ForReadMe3.PNG)
 
-⚙️ Kaynak kod
+---
 
-Kayıtlı Modeller: https://drive.google.com/drive/folders/12P2nE41sQqBLIzCJvWrwcIU0k7Kgit5V?usp=sharing
+## ⚙️ Yöntemoloji
 
-1. 📁 Veri Yükleme ve Birleştirme
-   
-Tüm .csv dosyaları okunur ve tek bir DataFrame'de birleştirilir.
+Proje süreci aşağıdaki adımlardan oluşmaktadır:
 
-3. 🧹 Veri Temizleme
-   
-Eksik değerler ve inf değerler kontrol edilip temizlenir.
+1. Verilerin yüklenmesi ve birleştirilmesi  
+2. Temizlik ve ön işleme işlemleri  
+3. Saldırı türlerinin dağılımının analizi  
+4. Özellik seçimi ve boyut indirgeme (PCA)  
+5. Makine öğrenmesi modellerinin eğitilmesi  
+6. Performans ölçümü ve değerlendirme  
+7. Modellerin kaydedilmesi
 
-Yinelenen satırlar kaldırılır.
+---
 
-Boşluk içeren sütun isimleri düzeltildi.
+## 🧹 Veri Ön İşleme
 
-3. 📈 Veri Analizi
-   
-Saldırı türlerinin dağılımı görselleştirildi.
+- Eksik (`NaN`) ve sonsuz (`inf`) değerler temizlendi.  
+- Yinelenen satırlar kaldırıldı.  
 
-Flow Bytes/s gibi bazı değişkenlerin istatistikleri farklı saldırı türleri için incelendi.
 
-4. 🧪 Özellik Seçimi
-   
-Varyansı 0 olan özellikler çıkarıldı.
+---
 
-Aynı olan sütunlar (ör. Total Fwd Packets = Subflow Fwd Packets) silindi.
+## 📊 Özellik Mühendisliği
 
-Korelasyonu yüksek (> 0.9) olan sütunlar tespit edildi.
+- **Varyansı 0** olan sütunlar çıkarıldı.  
+- **Eş anlamlı** (aynı veri içeren) sütunlar silindi.  
+  - Örn: `Total Fwd Packets` = `Subflow Fwd Packets`  
+- **Yüksek korelasyonlu** (ρ > 0.9) değişkenler tespit edildi.  
+- **PCA (Principal Component Analysis)** ile bazı değişkenler birleştirildi.
 
-7. ⚗️ PCA (Principal Component Analysis)
-   
-Korelasyonu yüksek bazı sütunlar PCA ile birleştirildi (ör: Bwd Packet Length Max, Mean, Std).
+---
 
-5. 🧠 Model Eğitimi
-   
-Random Forest ve Decision Tree modelleri eğitildi.
+## 🧠 Model Geliştirme
 
-Verinin %70'i eğitim, %30'u test için kullanıldı.
+Proje kapsamında iki makine öğrenmesi modeli eğitildi:
 
-Performans classification_report ile ölçüldü.
+- 🌲 **Random Forest Classifier**  
+- 🌳 **Decision Tree Classifier**
 
-6. 📉 Özellik Önem Değerlendirmesi
-   
-En etkili 20 özellik görselleştirildi.
+Veri oranı:
+- %70 Eğitim
+- %30 Test
 
-8. 💾 Model Kaydetme
-   
-Eğitim tamamlanan Random Forest ve Decision Tree Classifier modeli rf_model.pkl ve dt_model.pkl olarak kaydedildi.
+### 🧪 Kullanılan Python Kütüphaneleri
 
-🧪 Kullanılan Kütüphaneler
-
-pandas, numpy, matplotlib, seaborn
-
-sklearn (RandomForestClassifier, DecisionTreeClassifier, PCA, train_test_split)
-
+```python
+pandas, numpy, matplotlib, seaborn  
+sklearn (RandomForestClassifier, DecisionTreeClassifier, PCA, train_test_split)  
 joblib
+```
 
-📌 Notlar
+---
 
-Ölçekleme (StandardScaler) bazı modeller için önerilir (SVM, KNN), ancak bu proje temel modellerle başlamıştır.
+## 📈 Model Değerlendirme
 
-Geliştirme için CUDA destekli modeller (XGBoost GPU) ileride entegre edilebilir.
+Model performansı `classification_report` ile değerlendirildi. Kaynak kodun içerisinde paylaşılmıştır.
+
+- **Random Forest**, daha yüksek doğruluk ve genelleme başarısı gösterdi.  
+- **Confusion Matrix** analizi ile yanlış sınıflandırmalar incelendi.  
+- Özellik önem dereceleri çıkarılarak, modeli etkileyen en güçlü değişkenler belirlendi:
+
+📊 **En önemli 20 özellik:**
+
+![Özellik Önemi](Images/ForReadMe4.PNG)
+
+---
+
+## ✅ Sonuç ve Tartışma
+
+- Hem akademik çalışmalarda hem bu çalışmada modeller çok iyi performans göstermiştir.
+- PCA, özellik boyutunu azaltarak eğitim süresini kısalttı . Fakat PCA sonrası eğitilen modeller kodda paylaşılmadı.  
+- En etkili özellikler genellikle paket boyutları, yön bilgileri ve akış süreleri oldu.  
+- CICIDS2017 veri kümesi sayesinde gerçekçi bir senaryo oluşturulabildi.
+
+---
+
+## ⚠️ Zorluklar ve Sınırlılıklar
+
+- **Sınıf dengesizliği**, az sayıda saldırı türünün öğrenilmesini zorlaştırabilir.  
+- **Model yorumlanabilirliği** derin öğrenme kullanılmadığı için şu an anlaşılır, ancak ileri aşamada karmaşık hale gelebilir.  
+- Yeni saldırı türlerine karşı **genelleme yeteneği**, modelin güncellenmesini gerektirir.
+
+---
+
+## 📚 Kaynaklar
+
+- CICIDS2017 Dataset – [Kaggle](https://www.kaggle.com/datasets/chethuhn/network-intrusion-dataset/data)  
+- ["Makine Öğrenmesi Yöntemleriyle Anormal Ağ Trafiğinin Tespiti"](https://dergipark.org.tr/tr/pub/dubited/issue/43004/498358)  
+- scikit-learn Documentation  
+- CICFlowMeter – Feature Extraction Aracı
