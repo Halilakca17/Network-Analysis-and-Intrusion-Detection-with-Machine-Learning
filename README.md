@@ -32,6 +32,9 @@ CICFlowMeter ile ağ trafiğinden özelliklerin nasıl çıkartıldığı ve bu 
 ![Görsel  4](Images/ForReadMe3.PNG)
 
 ⚙️ Kaynak kod
+
+Kayıtlı Modeller: https://drive.google.com/drive/folders/12P2nE41sQqBLIzCJvWrwcIU0k7Kgit5V?usp=sharing
+
 1. 📁 Veri Yükleme ve Birleştirme
    
 Tüm .csv dosyaları okunur ve tek bir DataFrame'de birleştirilir.
